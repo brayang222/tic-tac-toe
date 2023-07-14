@@ -1,7 +1,7 @@
 let playerText = document.getElementById('playerText');
 let rBtn = document.getElementById('restartBtn');
 let boxes = Array.from(document.getElementsByClassName('box'));
-const blackScreenBtn = document.getElementById('blackScreenBtn');
+let boxesH1 = Array.from(document.getElementsByClassName('box-h1'));
 const blackScreen = document.getElementById('blackScreen');
 const winnerText = document.querySelector('.winnerText')
 
@@ -25,18 +25,18 @@ function boxClicked (e) {
     if(playerWon()){
       const jsConfetti = new JSConfetti();
       jsConfetti.addConfetti();
+
       blackScreen.style.display = 'flex';
       setTimeout(() => {
         blackScreen.style.display = 'none';
       }, 3000);
 
-      winnerText.innerText = `${currentPlayer} has won!`
-      let winningBlocks = playerWon()
+      winnerText.innerText = `${currentPlayer} has won!`;
+      playerText.innerText = `${currentPlayer} has won!`;
+      let winningBlocks = playerWon();
 
-      winningBlocks.map(box => boxes[box].classList.add('winnerInd'))
-      spaces.fill('*')
-      
-     
+      winningBlocks.map(box => boxes[box].classList.add('winnerInd'));
+      spaces.fill('*');
     } 
     currentPlayer = currentPlayer === X_TEXT ? O_TEXT : X_TEXT;
   }
