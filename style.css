@@ -71,6 +71,11 @@ button:hover {
   color: #2cb32c;
 }
 
+.divDeshabilitado {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
 #blackScreen {
   display: none;
   position: fixed;

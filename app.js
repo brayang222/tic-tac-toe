@@ -24,6 +24,7 @@ function boxClicked (e) {
 
     if(playerWon()){
       const jsConfetti = new JSConfetti();
+      jsConfetti.addConfetti();
       blackScreen.style.display = 'flex';
       setTimeout(() => {
         blackScreen.style.display = 'none';
@@ -33,7 +34,8 @@ function boxClicked (e) {
       let winningBlocks = playerWon()
 
       winningBlocks.map(box => boxes[box].classList.add('winnerInd'))
-      jsConfetti.addConfetti();
+      spaces.fill('*')
+      
      
     } 
     currentPlayer = currentPlayer === X_TEXT ? O_TEXT : X_TEXT;
