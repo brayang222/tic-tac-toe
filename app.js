@@ -1,11 +1,15 @@
 let playerText = document.getElementById('playerText');
 let rBtn = document.getElementById('restartBtn');
 let boxes = Array.from(document.getElementsByClassName('box'));
+const blackScreenBtn = document.getElementById('blackScreenBtn');
+const blackScreen = document.getElementById('blackScreen');
+const winnerText = document.querySelector('.winnerText')
+
 
 const O_TEXT = 'O';
 const X_TEXT = 'X';
 let currentPlayer = X_TEXT;
-let spaces = Array(9).fill(null)
+let spaces = Array(9).fill(null);
 
 const startGame = () => {
   boxes.forEach(box => box.addEventListener('click', boxClicked))
@@ -19,14 +23,20 @@ function boxClicked (e) {
     e.target.innerText = currentPlayer;
 
     if(playerWon()){
-      playerText = `${currentPlayer} has won!`
+      const jsConfetti = new JSConfetti();
+      blackScreen.style.display = 'flex';
+      setTimeout(() => {
+        blackScreen.style.display = 'none';
+      }, 3000);
+
+      winnerText.innerText = `${currentPlayer} has won!`
       let winningBlocks = playerWon()
 
       winningBlocks.map(box => boxes[box].classList.add('winnerInd'))
-      return
+      jsConfetti.addConfetti();
+     
     } 
-
-      currentPlayer = currentPlayer === X_TEXT ? O_TEXT : X_TEXT
+    currentPlayer = currentPlayer === X_TEXT ? O_TEXT : X_TEXT;
   }
 }
 
@@ -62,12 +72,15 @@ function restart () {
     box.classList.remove('winnerInd')
   })
 
-  playerText = 'Triki'
+  playerText.innerText = 'Triki';
 
-  currentPlayer = X_TEXT
+  currentPlayer = X_TEXT;
 }
 
 startGame();
+
+// ------------------------------ CONFETI -----------------------------------------------
+
 
 
 
